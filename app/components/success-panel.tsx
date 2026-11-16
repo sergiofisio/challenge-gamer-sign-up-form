@@ -18,9 +18,9 @@ export default function SuccessPanel({ callsign }: SuccessPanelProps) {
   }, []);
 
   return (
-    <div className="flex flex-col items-start gap-8 py-4 md:py-8">
+    <div className="flex flex-col items-start gap-8 py-6 md:py-10">
       <motion.div
-        initial={{ scale: 0.8, opacity: 0 }}
+        initial={{ scale: 0.85, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         transition={{ type: "spring", stiffness: 260, damping: 20 }}
       >
@@ -35,20 +35,13 @@ export default function SuccessPanel({ callsign }: SuccessPanelProps) {
         >
           <span className="text-lime-500">//</span> Handshake complete
         </h2>
-        <p className="font-jetbrains-mono text-sm leading-6 text-neutral-400">
-          Operator{" "}
-          <span className="text-lime-500">{callsign}</span> provisioned.
-          Your account is ready.
+        <p className="max-w-[28ch] font-jetbrains-mono text-sm leading-6 text-neutral-400">
+          Operator <span className="text-lime-500">{callsign}</span>{" "}
+          provisioned. Your account is ready.
         </p>
       </div>
 
-      <Button
-        label="Continue to log in"
-        type="button"
-        onClick={() => {
-          /* decorative for this challenge */
-        }}
-      />
+      <Button label="Continue to log in" type="button" className="mt-2" />
     </div>
   );
 }

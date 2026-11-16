@@ -248,34 +248,36 @@ export default function SignUpForm() {
   };
 
   return (
-    <div className="relative z-10 mx-auto flex w-full max-w-[1440px] flex-col gap-10 px-5 py-8 md:px-10 lg:grid lg:grid-cols-2 lg:items-center lg:gap-16 lg:px-20 lg:py-16 xl:gap-24">
-      <div className="flex flex-col gap-8 lg:gap-16">
-        <header className="flex items-center justify-between gap-4">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src="/assets/images/logo.svg"
-            alt="NEONCORE"
-            className="h-8 w-auto"
-          />
-          <p
-            className={cn(
-              "font-jetbrains-mono text-xs font-bold uppercase tracking-[0.16em] lg:hidden",
-              status === "success" || readyCount === 5
-                ? "text-lime-500"
-                : "text-neutral-500",
-            )}
-          >
-            {status === "success" ? "Provisioned" : `${readyCount}/5 ready`}
-          </p>
-        </header>
+    <div className="relative z-10 mx-auto grid w-full max-w-360 grid-cols-1 items-center gap-10 px-30! lg:grid-cols-[minmax(0,1fr)_minmax(320px,540px)] lg:gap-16 xl:gap-24">
+      <div className="flex flex-col gap-8 lg:min-h-160 lg:justify-between lg:gap-16">
+        <div className="flex flex-col gap-8 lg:gap-12">
+          <header className="flex items-center justify-between gap-4">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/assets/images/logo.svg"
+              alt="NEONCORE"
+              className="h-8 w-auto"
+            />
+            <p
+              className={cn(
+                "font-jetbrains-mono text-xs font-bold uppercase tracking-[0.16em] lg:hidden",
+                status === "success" || readyCount === 5
+                  ? "text-lime-500"
+                  : "text-neutral-500",
+              )}
+            >
+              {status === "success" ? "Provisioned" : `${readyCount}/5 ready`}
+            </p>
+          </header>
 
-        <div className="flex flex-col gap-4">
-          <h1 className="font-orbitron text-[36px] font-extrabold uppercase leading-10 tracking-[0.04em] text-neutral-50 md:text-[40px] md:leading-12 lg:text-[72px] lg:leading-20">
-            <span className="text-lime-500">//</span> Join the nexus
-          </h1>
-          <p className="font-jetbrains-mono text-xs uppercase tracking-[0.16em] text-neutral-500">
-            Initialize your NEONCORE identity
-          </p>
+          <div className="flex flex-col gap-3 lg:gap-4">
+            <h1 className="font-orbitron text-[36px] font-extrabold uppercase leading-10 tracking-[0.04em] text-neutral-50 md:text-[40px] md:leading-12 lg:text-[72px] lg:leading-20">
+              <span className="text-lime-500">//</span> Join the nexus
+            </h1>
+            <p className="font-jetbrains-mono text-xs uppercase tracking-[0.16em] text-neutral-500">
+              Initialize your NEONCORE identity
+            </p>
+          </div>
         </div>
 
         <div className="lg:hidden">
@@ -300,11 +302,11 @@ export default function SignUpForm() {
 
       <div
         className={cn(
-          "corner-frame border border-neutral-800 bg-navy-alpha-80 p-5 md:p-8",
+          "flex flex-col corner-frame w-full border border-neutral-800 bg-navy-alpha-80 p-10! backdrop-blur-[2px] gap-5 md:p-8",
           shake && "shake",
         )}
       >
-        <div className="mb-6 flex items-center justify-between gap-4 border-b border-neutral-800 pb-4">
+        <div className="mb-6 flex items-center justify-between gap-4 border-b border-neutral-800 pb-4!">
           <p className="font-jetbrains-mono text-xs uppercase tracking-[0.16em] text-neutral-400">
             New operator
           </p>
@@ -320,7 +322,7 @@ export default function SignUpForm() {
           <form
             noValidate
             onSubmit={handleSubmit}
-            className="flex flex-col gap-6"
+            className="flex flex-col gap-10"
           >
             <div ref={callsignRef}>
               <FormField

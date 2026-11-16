@@ -1,15 +1,16 @@
 import SignUpForm from "./components/sign-up-form";
 
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
+
 export default function Home() {
   return (
-    <main className="relative min-h-screen overflow-hidden bg-navy-950">
+    <main className="relative flex min-h-screen items-center justify-center overflow-x-hidden px-5 py-10 md:px-10 lg:px-16 xl:px-20">
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-y-0 right-0 hidden w-1/2 bg-[url('/assets/images/pattern-backdrop.svg')] bg-right bg-no-repeat opacity-70 lg:block"
-      />
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(77_90%_59%/0.08),transparent_50%)]"
+        className="pointer-events-none absolute top-1/2 right-0 hidden h-[960px] w-[960px] -translate-y-1/2 translate-x-[18%] bg-contain bg-center bg-no-repeat opacity-80 lg:block"
+        style={{
+          backgroundImage: `url('${basePath}/assets/images/pattern-backdrop.svg')`,
+        }}
       />
       <SignUpForm />
     </main>

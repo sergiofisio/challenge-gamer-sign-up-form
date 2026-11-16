@@ -1,22 +1,5 @@
 @import "tailwindcss";
 
-@font-face {
-  font-family: "Orbitron";
-  src: url("/assets/fonts/orbitron/orbitron-variable.ttf") format("truetype");
-  font-weight: 100 900;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "JetBrains Mono";
-  src: url("/assets/fonts/jetbrains-mono/jetbrains-mono-variable.ttf")
-    format("truetype");
-  font-weight: 100 900;
-  font-style: normal;
-  font-display: swap;
-}
-
 @theme {
   --color-neutral-50: hsl(204 60% 97%);
   --color-neutral-100: hsl(208 49% 92%);
@@ -41,8 +24,9 @@
   --color-navy-alpha-80: hsl(214 60% 2% / 0.8);
   --color-navy-alpha-60: hsl(214 60% 2% / 0.6);
 
-  --font-orbitron: "Orbitron", sans-serif;
-  --font-jetbrains-mono: "JetBrains Mono", monospace;
+  --font-orbitron: var(--font-orbitron-face), "Orbitron", sans-serif;
+  --font-jetbrains-mono: var(--font-jetbrains-mono-face), "JetBrains Mono",
+    monospace;
 }
 
 * {
@@ -59,7 +43,6 @@ body {
 body {
   background: var(--color-navy-950);
   color: var(--color-neutral-100);
-  font-family: var(--font-jetbrains-mono);
 }
 
 ::selection {
@@ -67,11 +50,12 @@ body {
   color: var(--color-neutral-50);
 }
 
-/* Focus: double lime ring matching the design */
+/* Focus: double lime ring (border + outer outline) */
 .field-focus:focus-within:not(.field-error) {
-  outline: 2px solid var(--color-lime-500);
-  outline-offset: 2px;
   border-color: var(--color-lime-500);
+  box-shadow:
+    0 0 0 2px var(--color-navy-950),
+    0 0 0 4px var(--color-lime-500);
 }
 
 .field-error {
@@ -79,8 +63,9 @@ body {
 }
 
 .field-error:focus-within {
-  outline: 2px solid var(--color-red-400);
-  outline-offset: 2px;
+  box-shadow:
+    0 0 0 2px var(--color-navy-950),
+    0 0 0 4px var(--color-red-400);
 }
 
 /* Form panel corner brackets */
@@ -92,9 +77,10 @@ body {
 .corner-frame::after {
   content: "";
   position: absolute;
-  width: 20px;
-  height: 20px;
+  width: 24px;
+  height: 24px;
   pointer-events: none;
+  z-index: 1;
 }
 
 .corner-frame::before {
@@ -114,32 +100,49 @@ body {
 .link-lime {
   color: var(--color-lime-500);
   text-decoration: underline;
+  text-decoration-style: dotted;
   text-underline-offset: 3px;
 }
 
 .link-lime:hover,
 .link-lime:focus-visible {
-  outline: 2px solid var(--color-lime-500);
-  outline-offset: 2px;
+  outline: 1px solid var(--color-lime-500);
+  outline-offset: 4px;
+  text-decoration: none;
 }
 
 .btn-primary {
   background: var(--color-lime-500);
   color: var(--color-neutral-950);
-  transition: background-color 150ms ease, color 150ms ease, box-shadow 150ms ease;
+  border: 1px solid var(--color-lime-500);
+  transition:
+    background-color 150ms ease,
+    color 150ms ease,
+    box-shadow 150ms ease,
+    border-color 150ms ease;
 }
 
-.btn-primary:hover:not(:disabled) {
+.btn-primary:hover:not(:disabled):not(.btn-loading) {
   background: var(--color-neutral-50);
+  border-color: var(--color-neutral-50);
   box-shadow: 4px 4px 0 0 var(--color-lime-500);
 }
 
-.btn-primary:focus-visible {
+.btn-primary:focus-visible:not(.btn-loading) {
   outline: 2px solid var(--color-lime-500);
   outline-offset: 4px;
 }
 
-.btn-primary:disabled {
+.btn-primary.btn-loading {
+  background: transparent;
+  color: var(--color-lime-500);
+  border-color: var(--color-lime-500);
+  box-shadow: none;
+  cursor: wait;
+  opacity: 1;
+}
+
+.btn-primary:disabled:not(.btn-loading) {
   cursor: not-allowed;
   opacity: 0.85;
 }
@@ -155,6 +158,10 @@ body {
   position: relative;
 }
 
+.checkbox-custom:hover {
+  border-color: var(--color-lime-500);
+}
+
 .checkbox-custom:checked {
   border-color: var(--color-lime-500);
   background: var(--color-lime-500);
@@ -163,13 +170,20 @@ body {
 .checkbox-custom:checked::after {
   content: "";
   position: absolute;
-  inset: 3px;
-  background: url("/assets/images/icon-tick-16.svg") center / contain no-repeat;
+  top: 3px;
+  left: 6px;
+  width: 5px;
+  height: 9px;
+  border: solid var(--color-neutral-950);
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
 }
 
 .checkbox-custom:focus-visible {
-  outline: 2px solid var(--color-lime-500);
-  outline-offset: 2px;
+  border-color: var(--color-lime-500);
+  box-shadow:
+    0 0 0 2px var(--color-navy-950),
+    0 0 0 4px var(--color-lime-500);
 }
 
 .checkbox-error {

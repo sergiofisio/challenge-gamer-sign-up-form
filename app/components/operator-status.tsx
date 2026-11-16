@@ -56,7 +56,7 @@ export default function OperatorStatus({
   }
 
   return (
-    <section aria-label="Operator ID status" className="flex flex-col gap-4">
+    <section aria-label="Operator ID status" className="flex max-w-md flex-col gap-4">
       <div className="flex items-end justify-between gap-4 border-b border-neutral-800 pb-3">
         <p className="font-jetbrains-mono text-xs uppercase tracking-[0.16em] text-neutral-500">
           Operator ID
@@ -75,7 +75,7 @@ export default function OperatorStatus({
 
       <p
         className={cn(
-          "font-orbitron text-2xl font-extrabold uppercase tracking-[0.04em] leading-8",
+          "font-orbitron text-2xl font-extrabold uppercase tracking-[0.04em] leading-8 break-all",
           callsignDisplay === "Unassigned"
             ? "text-neutral-600"
             : "text-neutral-50",
@@ -97,7 +97,7 @@ export default function OperatorStatus({
             />
             <span
               className={cn(
-                "shrink-0 font-bold",
+                "shrink-0",
                 statusClass(row.status, provisioned),
               )}
             >

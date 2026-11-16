@@ -24,7 +24,6 @@ interface FormFieldProps {
   disabled?: boolean;
   autoComplete?: string;
   describedByExtra?: string;
-  /** When false, error text is not rendered (caller renders it). */
   showErrorMessage?: boolean;
 }
 
@@ -65,7 +64,7 @@ export default function FormField({
     <div className="flex flex-col gap-2">
       <label
         htmlFor={id}
-        className="font-jetbrains-mono text-sm font-medium uppercase leading-6 text-neutral-300"
+        className="font-jetbrains-mono text-sm font-medium uppercase leading-6 tracking-normal text-neutral-300"
       >
         <span className="text-lime-500" aria-hidden="true">
           {"> "}
@@ -75,9 +74,9 @@ export default function FormField({
 
       <div
         className={cn(
-          "field-focus relative flex items-center border border-neutral-700 bg-neutral-950",
+          "field-focus relative flex min-h-12 items-center border border-neutral-700 bg-navy-950",
           error && "field-error",
-          disabled && "opacity-70",
+          disabled && "pointer-events-none opacity-60",
         )}
       >
         <input
@@ -99,7 +98,7 @@ export default function FormField({
           )}
         />
 
-        <div className="absolute right-3 top-1/2 flex -translate-y-1/2 items-center gap-2">
+        <div className="absolute top-1/2 right-3 flex -translate-y-1/2 items-center gap-2">
           {showValid && !error ? (
             <Image src={tickIcon} alt="" width={20} height={20} aria-hidden />
           ) : null}
@@ -107,12 +106,11 @@ export default function FormField({
           {isPassword ? (
             <button
               type="button"
-              tabIndex={0}
               disabled={disabled}
               aria-label={visible ? "Hide password" : "Show password"}
               aria-pressed={visible}
               onClick={() => setVisible((v) => !v)}
-              className="grid size-6 place-items-center text-neutral-400 hover:text-lime-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-lime-500"
+              className="grid size-6 place-items-center text-neutral-400 hover:text-lime-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-lime-500"
             >
               <Image
                 src={visible ? eyeOffIcon : eyeIcon}

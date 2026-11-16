@@ -1,12 +1,20 @@
 import type { NextConfig } from "next";
 
+const repo = "challenge-gamer-sign-up-form";
+const isGithubPages = process.env.GITHUB_PAGES === "true";
+const basePath = isGithubPages ? `/${repo}` : "";
+
 const nextConfig: NextConfig = {
-  /* config options here */
-  experimental: {
-    agentFeedback: true,
+  output: "export",
+  trailingSlash: true,
+  images: {
+    unoptimized: true,
   },
-  cacheComponents: true,
-  partialPrefetching: true,
+  basePath,
+  assetPrefix: basePath ? `${basePath}/` : undefined,
+  env: {
+    NEXT_PUBLIC_BASE_PATH: basePath,
+  },
   turbopack: {
     rules: {
       "*.css": {
