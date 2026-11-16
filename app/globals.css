@@ -1,0 +1,208 @@
+@import "tailwindcss";
+
+@font-face {
+  font-family: "Orbitron";
+  src: url("/assets/fonts/orbitron/orbitron-variable.ttf") format("truetype");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "JetBrains Mono";
+  src: url("/assets/fonts/jetbrains-mono/jetbrains-mono-variable.ttf")
+    format("truetype");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@theme {
+  --color-neutral-50: hsl(204 60% 97%);
+  --color-neutral-100: hsl(208 49% 92%);
+  --color-neutral-200: #e5e7eb;
+  --color-neutral-300: hsl(211 18% 68%);
+  --color-neutral-400: hsl(211 13% 55%);
+  --color-neutral-500: hsl(211 14% 50%);
+  --color-neutral-600: hsl(210 18% 42%);
+  --color-neutral-700: hsl(211 22% 24%);
+  --color-neutral-800: hsl(211 30% 13%);
+  --color-neutral-900: hsl(210 39% 7%);
+  --color-neutral-950: hsl(214 37% 4%);
+
+  --color-lime-500: hsl(77 90% 59%);
+  --color-lime-700: hsl(77 67% 39%);
+  --color-lime-alpha-60: hsl(77 90% 59% / 0.6);
+  --color-lime-alpha-40: hsl(77 90% 59% / 0.4);
+
+  --color-red-400: hsl(4 100% 74%);
+  --color-amber-400: hsl(40 100% 65%);
+  --color-navy-950: hsl(214 60% 2%);
+  --color-navy-alpha-80: hsl(214 60% 2% / 0.8);
+  --color-navy-alpha-60: hsl(214 60% 2% / 0.6);
+
+  --font-orbitron: "Orbitron", sans-serif;
+  --font-jetbrains-mono: "JetBrains Mono", monospace;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  min-height: 100%;
+}
+
+body {
+  background: var(--color-navy-950);
+  color: var(--color-neutral-100);
+  font-family: var(--font-jetbrains-mono);
+}
+
+::selection {
+  background: var(--color-lime-alpha-40);
+  color: var(--color-neutral-50);
+}
+
+/* Focus: double lime ring matching the design */
+.field-focus:focus-within:not(.field-error) {
+  outline: 2px solid var(--color-lime-500);
+  outline-offset: 2px;
+  border-color: var(--color-lime-500);
+}
+
+.field-error {
+  border-color: var(--color-red-400) !important;
+}
+
+.field-error:focus-within {
+  outline: 2px solid var(--color-red-400);
+  outline-offset: 2px;
+}
+
+/* Form panel corner brackets */
+.corner-frame {
+  position: relative;
+}
+
+.corner-frame::before,
+.corner-frame::after {
+  content: "";
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  pointer-events: none;
+}
+
+.corner-frame::before {
+  top: -1px;
+  left: -1px;
+  border-top: 2px solid var(--color-lime-500);
+  border-left: 2px solid var(--color-lime-500);
+}
+
+.corner-frame::after {
+  right: -1px;
+  bottom: -1px;
+  border-right: 2px solid var(--color-lime-500);
+  border-bottom: 2px solid var(--color-lime-500);
+}
+
+.link-lime {
+  color: var(--color-lime-500);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.link-lime:hover,
+.link-lime:focus-visible {
+  outline: 2px solid var(--color-lime-500);
+  outline-offset: 2px;
+}
+
+.btn-primary {
+  background: var(--color-lime-500);
+  color: var(--color-neutral-950);
+  transition: background-color 150ms ease, color 150ms ease, box-shadow 150ms ease;
+}
+
+.btn-primary:hover:not(:disabled) {
+  background: var(--color-neutral-50);
+  box-shadow: 4px 4px 0 0 var(--color-lime-500);
+}
+
+.btn-primary:focus-visible {
+  outline: 2px solid var(--color-lime-500);
+  outline-offset: 4px;
+}
+
+.btn-primary:disabled {
+  cursor: not-allowed;
+  opacity: 0.85;
+}
+
+.checkbox-custom {
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border: 1px solid var(--color-neutral-600);
+  background: transparent;
+  flex-shrink: 0;
+  cursor: pointer;
+  position: relative;
+}
+
+.checkbox-custom:checked {
+  border-color: var(--color-lime-500);
+  background: var(--color-lime-500);
+}
+
+.checkbox-custom:checked::after {
+  content: "";
+  position: absolute;
+  inset: 3px;
+  background: url("/assets/images/icon-tick-16.svg") center / contain no-repeat;
+}
+
+.checkbox-custom:focus-visible {
+  outline: 2px solid var(--color-lime-500);
+  outline-offset: 2px;
+}
+
+.checkbox-error {
+  border-color: var(--color-red-400) !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn-primary,
+  .shake {
+    transition: none !important;
+    animation: none !important;
+  }
+}
+
+@keyframes shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  20% {
+    transform: translateX(-6px);
+  }
+  40% {
+    transform: translateX(6px);
+  }
+  60% {
+    transform: translateX(-4px);
+  }
+  80% {
+    transform: translateX(4px);
+  }
+}
+
+.shake {
+  animation: shake 0.4s ease;
+}
